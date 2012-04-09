@@ -1,0 +1,243 @@
+body
+{
+    margin:0;
+    padding:0;
+    line-height: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#err
+{
+    color: red;
+}
+
+#header
+{
+    background-color: #FFFFCC;
+    height: 90px; /*Height of top section*/
+    border-bottom: 0.6em double #CC3333;
+
+}
+
+#header h1
+{
+    font-size: 1.8em;
+    margin: 0;
+    padding-top: 1em;
+    text-align: center;
+    color: #CC3333;
+    text-shadow: 0.1em 0.1em 0.2em gray;
+}
+
+h2
+{
+    font-size: 1.25em;
+    margin: 0;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    text-align: center;
+    text-shadow: 0.1em 0.1em 0.2em gray;
+}
+
+#header_center
+{
+    margin: 0 15% 0 15%; /*Margins for content column. Should be "0 RightColumnWidth 0 LeftColumnWidth*/
+}
+
+#header_left
+{
+    float: left;
+    width: 15%; /*Width of left column in percentage*/
+    height: 90px;
+    margin-left: -100%;
+    /* background: rgb(220,220,220); */
+}
+
+#header_right
+{
+    float: left;
+    width: 15%; /*Width of right column in pixels*/
+    margin-left: -15%; /*Set margin to that of -(RightColumnWidth)*/
+    background: rgb(220,220,220);
+}
+
+#contentwrapper_hdr
+{
+    float: left;
+    width: 100%;
+}
+
+#contentwrapper
+{
+    float: left;
+    width: 100%;
+    margin-top: 1em;
+}
+
+#center_column
+{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin: 0 20% 0 20%;
+}
+#menu_center
+{
+	padding-top: .75em;
+    padding-bottom: .75em;
+    margin-top: 1em;
+    margin: 0 15% 0 15%;
+   	border: 0.6em solid #F78181;
+  	border-style: ridge;
+}
+
+#footer
+{
+    margin-top: 1em;
+   /*  border-top: solid .15em black; */
+    font-size: .75em;
+    clear: left;
+    width: 100%;
+    color: black;
+    text-align: center;
+    padding: 8px 0;
+}
+
+.innertube
+{
+    margin: .5em; /*Margins for inner DIV inside each column (to provide padding)*/
+    margin-top: .5em;
+}
+
+#panel 
+{
+	overflow-y:hidden;
+    width:auto;
+    margin: 0 auto;
+    margin-top: .5em;
+    margin-bottom: .2em;
+    margin-right: .5em;
+    margin-left: .5em;
+    /* padding-bottom: 2em; */
+    padding: .5em .5em .5em .5em;
+    line-height:150%;
+    /* margin: 1em; */
+    background-color:#eee;
+    border:.125em solid #dedede;
+    border-radius: 15px;
+}
+
+#row
+{
+    width: 100%;
+    margin-top: .9em;
+    /* border: solid black; */
+}
+
+#r1
+{
+    width: 100%;
+    /* margin-top: .9em; */
+    /* border: solid black; */
+}
+
+#menu_section 
+{
+	margin-left: .5em;	
+}
+
+#section_content 
+{
+	margin-left: 1em;
+	overflow-y:hidden;
+}
+
+#section_title {
+	font-size: .9em;
+    margin: 0;
+    padding-top: .15em;
+    padding-bottom: .15em;
+    font-weight: bold;
+    text-shadow: 0.1em 0.1em 0.2em gray;
+}
+
+
+#item_label
+{
+	/* margin-right: 1em; */
+	/* width: 10em; */
+	/* background-color: red; */
+	float:left;
+    width: 50%;
+}
+
+#price
+{
+	/* margin-left: .5em;
+	width: 10em; */
+	float:left;
+    width: 50%;
+}
+
+#left {
+	float:left;
+    width: 50%;
+	/* background-color: blue; */
+	margin-bottom: .5em;
+}
+#right {
+	float: left;
+	width: 50%;
+	/* background-color: red; */
+	margin-bottom: .5em;
+}
+
+#whole {
+	float:left;
+    width: 100%;
+	/* background-color: yellow; */
+	margin-bottom: 1em;
+	margin-top: 	
+}
+
+#whole_wrap
+{
+	float: left;
+    width: 100%;
+}
+
+#whole_ctr
+{
+	margin: 0 30% 0 30%;
+	/* background-color: gray; */
+}
+
+#whole_left
+{
+	float: left;
+    width: 30%; /*Width of left column in percentage*/
+    /* height: 90px; */
+    margin-left: -100%;
+    /* background-color: red; */
+}
+#whole_right
+{
+	float: left;
+    width: 30%; /*Width of right column in pixels*/
+    margin-left: -30%; /*Set margin to that of -(RightColumnWidth)*/
+    /* background-color: blue; */
+}
+
+#instruction
+{
+	font-style: italic;
+	text-align: center;
+	font-size: .8em;
+}
+
+.register_box
+{
+    padding: 1em;
+    margin-top: 1em;
+    margin: 0 5% 0 5%;
+   	border: 0.6em solid #F78181;
+  	border-style: ridge;
+}

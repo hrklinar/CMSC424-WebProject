@@ -1,0 +1,129 @@
+@CHARSET "UTF-8";
+body{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	background-color: #CC3333;
+}
+
+#myImage {
+	margin-top: .5em;
+	border-top: .2em solid black;
+	border-bottom: .2em solid black;
+	height: 6em;
+	width: 100%;
+	background-image:url('pizzaIMG.jpg');
+	background-size: 20em 7em;
+	background-repeat:no-repeat;
+}
+
+h1{
+	text-align: center;
+	text-shadow: 0.1em 0.1em 0.2em #888;
+}
+
+.container {
+  position: relative; 
+     
+}
+
+
+#mid_inner {
+  position: absolute;       /* take element out of the normal page flow! */
+  top: 1.7em;                /* position the element vertically using top or bottom
+                               and define width as you like:*/
+  width: 60%;   
+  left: 0;                  /* set left and right to the same value! */
+  right: 0;
+  margin-left: auto;        /* adding auto-margins left and right will
+                               center the element horizontally!*/
+  margin-right: auto;
+  border: solid block;
+	
+}
+.center {
+  position: absolute;       /* take element out of the normal page flow! */
+  top: 1.7em;                /* position the element vertically using top or bottom
+                               and define width as you like:*/
+  width: 60%;   
+  left: 0;                  /* set left and right to the same value! */
+  right: 0;
+  margin-left: auto;        /* adding auto-margins left and right will
+                               center the element horizontally!*/
+  margin-right: auto;
+  border: 0.6em solid #E8A317;
+  border-style: ridge;
+  background-color: #FFFFCC;
+  
+  moz-box-shadow: 10px 10px 5px #E77471;
+	-webkit-box-shadow: 10px 10px 5px #E77471;
+	box-shadow: 10px 10px 5px #E77471;
+}
+
+#inner {
+	width: 80%;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: .2em;
+	margin-bottom: 1em;
+	/* border: 0.125em solid blue; */	
+	padding: .2em;
+}
+
+#inner_bot {
+	text-align: center;
+	font-size: .75em;
+	color: #544E4F;
+	border-top: .2em solid black;
+}
+
+#inner_text {
+	text-align: center;
+	font-size: 1em;
+	color: #544E4F;
+	margin-bottom: .5em;
+}
+
+#submit-button {
+	margin-top: .5em;
+}
+
+.buttons
+{
+	overflow-y:hidden;
+    width:100%;
+    margin: 0 auto;
+    margin-top: .5em;
+    margin-bottom: .2em;
+    margin-right: .5em;
+    margin-left: .5em;
+    /* padding-bottom: 2em; */
+    padding: .5em .5em .5em .5em;
+    line-height:150%;
+    /* margin: 1em; */
+
+
+}
+#menu
+{
+	float:left;
+    width: 25%;
+}
+
+#order
+{
+	float:left;
+    width: 25%;    
+}
+
+#contact
+{
+	float:left;
+    width: 25%;
+}
+
+#admin
+{
+	float:left;
+    width: 25%;
+}
