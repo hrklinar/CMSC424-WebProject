@@ -252,6 +252,11 @@ public class Register extends HttpServlet {
 					    	statement.executeQuery(query);
 					    	pgWrite += first_name + " " + last_name + ", you have successfully registered. You may now proceed in " +
 					    			"placing an order.";
+					    	//Log the user in
+					    	GlobalUser newUser = new GlobalUser(email, first_name, last_name, address);
+					    	session.setAttribute("user", newUser);
+					    	session.setAttribute("email", email);
+					    	pgWrite += "<form action='OrderOnline.jsp'> <input type='submit' value='Order Online' /> </form>";
 					    	pgWrite += "<form action='index.jsp'> <input type='submit' value='Home' /> </form>";
 //					    	pw.print(first_name + " " + last_name + ", you have successfully registered. You may now proceed in " +
 //					    			"placing an order.");
