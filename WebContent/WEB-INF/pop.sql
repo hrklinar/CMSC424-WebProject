@@ -51,6 +51,7 @@ create table happyPrices(item_id integer,
 create table transactions(trans_id integer primary key, 
 						  payment_id integer references payments(payment_id), 
 						  trans_date date, 
+						  status char,
 						  total number, 
 						  time timestamp, 
 						  eta integer);	
