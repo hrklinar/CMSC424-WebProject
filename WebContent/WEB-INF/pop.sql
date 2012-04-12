@@ -12,6 +12,8 @@ drop table preferences;
 drop table pizzas;
 drop table prices;
 drop table customers;
+drop sequence seq_trans;
+drop sequence seq_pizzas;
 
 create table customers(email char(25) primary key, 
 						password char(100), 
@@ -49,9 +51,10 @@ create table happyPrices(item_id integer,
 						price number,
 						primary key (item_id, type, day));	
 create table transactions(trans_id integer primary key, 
-						  payment_id integer references payments(payment_id), 
+						  payment_id integer references payments(payment_id),
+						  email char(25),
 						  trans_date date, 
-						  status char,
+						  status char default 'U',
 						  total number, 
 						  time timestamp, 
 						  eta integer);	
@@ -81,6 +84,17 @@ create table workHours(deliv_id integer references deliveryPersons(deliv_id),
 					   start_hour timestamp,
 					   end_hour timestamp,
 					   primary key (deliv_id, day));
+					
+CREATE SEQUENCE seq_trans
+	MINVALUE 1
+	START WITH 1
+	INCREMENT BY 1
+	CACHE 10;
+CREATE SEQUENCE seq_pizzas
+	MINVALUE 1
+	START WITH 1
+	INCREMENT BY 1
+	CACHE 10;
 
 insert into drinks values 	(1, 'coke', 'Coca-Cola', 'Coke');
 insert into drinks values 	(2, 'less calories in this coke', 'Coca-Cola', 'Diet Coke');
