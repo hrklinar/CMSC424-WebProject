@@ -112,32 +112,6 @@ public class Register extends HttpServlet {
 						"<center><div id='row'><input type='submit' name='submit' value='Register' /></div></center>" +
 						"</fieldset>" +
 						"</form></div></div>";
-//				pw.print("<form id='register' action='Register' method='post' accept-charset='UTF-8'>" +
-//				"<fieldset >" +
-//				"<legend>Register</legend>" + 
-//				"<input type='hidden' name='submitted' id='submitted' value='1'/>" +
-//				"<label for='email' >Email: </label>" +
-//				"<input type='text' name='email' id='email' maxlength=\"25\" />" +
-//				"<br />" +
-//				"<label for='password' >Password: </label>" +
-//				"<input type='password' name='password' id='password' maxlength=\"25\" />" +
-//				"<br />" + 
-//				"<label for='first_name' >First Name: </label>" +
-//				"<input type='text' name='first_name' id='first_name' maxlength=\"25\" />" +
-//				"<label for='last_name' > Last Name: </label>" +
-//				"<input type='text' name='last_name' id='last_name' maxlength=\"25\" />" +
-//				"<br />" + 
-//				"<label for='address' >Address: </label>" + 
-//				"<input type='text' name='address' id='address' maxlength=\"68\" size =\"60\" />" +
-//				"<br />" + 
-//				"<label for='city' >City:</label>" +
-//				"<input type='text' name='city' id='city' maxlength=\"30\" />" +
-//				"<label for='statecode' >State Code: </label>" +
-//				"<input type='text' name='statecode' id='statecode' maxlength=\"2\" size=\"2\" />" + 
-//				"<br />" + 
-//				"<input type='submit' name='submit' value='Register' />" +
-//				"</fieldset>" +
-//				"</form>");
 			} else { //Page has been called before
 				boolean valid_info = true;
 				
@@ -150,16 +124,13 @@ public class Register extends HttpServlet {
 				
 				if (email.equals("")) {
 					pgWrite += "<font color='red'>Email field left blank.</font><br />";
-//					pw.println("<font color='red'>Email field left blank.</font><br />");
 				} else if (email.indexOf('@') < 0) {
 					pgWrite += "<font color='red'>Invalid email. Emails must be of the form name@domain</font><br />";
-//					pw.println("<font color='red'>Invalid email. Emails must be of the form name@domain</font><br />");
 					valid_info = false;
 				}
 				
 				if (password.length() < 5) {
 					pgWrite += "<font color='red'>Password must be greater than five characters.</font><br />";
-//					pw.println("<font color='red'>Password must be greater than five characters.</font><br />");
 					valid_info = false;
 				}
 				
@@ -211,39 +182,7 @@ public class Register extends HttpServlet {
 									
 									"<center><div id='row'><input type='submit' name='submit' value='Register' /></div></center>" +
 									"</fieldset>" +
-									"</form></div></div>";
-					    	
-//					    	pw.print("Email already in use.<br />");
-//					    	pw.print("<form id='post' action='Login' method='post'>" + 
-//									"<input type='submit' name='login' value='Login' /><br /><br />");
-//					    	
-//					    	pw.print("<form id='register' action='Register' method='post' accept-charset='UTF-8'>" +
-//									"<fieldset >" +
-//									"<legend>Register</legend>" + 
-//									"<input type='hidden' name='submitted' id='submitted' value='1'/>" +
-//									"<label for='email' >Email: </label>" +
-//									"<input type='text' name='email' id='email' maxlength=\"25\" />" +
-//									"<br />" +
-//									"<label for='password' >Password: </label>" +
-//									"<input type='password' name='password' id='password' maxlength=\"25\" />" +
-//									"<br />" + 
-//									"<label for='first_name' >First Name: </label>" +
-//									"<input type='text' name='first_name' id='first_name' maxlength=\"25\" value='" + first_name + "' />" +
-//									"<label for='last_name' > Last Name: </label>" +
-//									"<input type='text' name='last_name' id='last_name' maxlength=\"25\" value='" + last_name + "' />" +
-//									"<br />" + 
-//									"<label for='address' >Address: </label>" + 
-//									"<input type='text' name='address' id='address' maxlength=\"68\" size =\"60\" value='" + address + "' />" +
-//									"<br />" + 
-//									"<label for='city' >City:</label>" +
-//									"<input type='text' name='city' id='city' maxlength=\"30\" value='" + city + "' />" +
-//									"<label for='statecode' >State Code: </label>" +
-//									"<input type='text' name='statecode' id='statecode' maxlength=\"2\" size=\"2\" value='" + state_code
-//									+ "' />" +
-//									"<br />" + 
-//									"<input type='submit' name='submit' value='Register' />" +
-//									"</fieldset>" +
-//									"</form>");
+									"</form></div></div>";					    	
 					    } else {
 					    	address = address + " " + city + ", " + state_code;
 					    	String query = "INSERT INTO customers (email, password, first_name, last_name, address) VALUES ('" +
@@ -258,9 +197,6 @@ public class Register extends HttpServlet {
 					    	session.setAttribute("email", email);
 					    	pgWrite += "<form action='OrderOnline.jsp'> <input type='submit' value='Order Online' /> </form>";
 					    	pgWrite += "<form action='index.jsp'> <input type='submit' value='Home' /> </form>";
-//					    	pw.print(first_name + " " + last_name + ", you have successfully registered. You may now proceed in " +
-//					    			"placing an order.");
-//					    	pw.print("<form action='index.jsp'> <input type='submit' value='Home' /> </form>");
 					    }
 					} catch (SQLException e) {
 					    System.out.println("An error occurs.");
@@ -293,38 +229,9 @@ public class Register extends HttpServlet {
 							"<center><div id='row'><input type='submit' name='submit' value='Register' /></div></center>" +
 							"</fieldset>" +
 							"</form></div></div>";
-//					pw.print("<form id='register' action='Register' method='post' accept-charset='UTF-8'>" +
-//							"<fieldset >" +
-//							"<legend>Register</legend>" + 
-//							"<input type='hidden' name='submitted' id='submitted' value='1'/>" +
-//							"<label for='email' >Email: </label>" +
-//							"<input type='text' name='email' id='email' maxlength=\"25\" value='" + email + "' />" +
-//							"<br />" +
-//							"<label for='password' >Password: </label>" +
-//							"<input type='password' name='password' id='password' maxlength=\"25\" />" +
-//							"<br />" + 
-//							"<label for='first_name' >First Name: </label>" +
-//							"<input type='text' name='first_name' id='first_name' maxlength=\"25\" value='" + first_name + "' />" +
-//							"<label for='last_name' > Last Name: </label>" +
-//							"<input type='text' name='last_name' id='last_name' maxlength=\"25\" value='" + last_name + "' />" +
-//							"<br />" + 
-//							"<label for='address' >Address: </label>" + 
-//							"<input type='text' name='address' id='address' maxlength=\"68\" size =\"60\" value='" + address + "' />" +
-//							"<br />" + 
-//							"<label for='city' >City:</label>" +
-//							"<input type='text' name='city' id='city' maxlength=\"30\" value='" + city + "' />" +
-//							"<label for='statecode' >State Code: </label>" +
-//							"<input type='text' name='statecode' id='statecode' maxlength=\"2\" size=\"2\" value='" + state_code
-//							+ "' />" +
-//							"<br />" + 
-//							"<input type='submit' name='submit' value='Register' />" +
-//							"</fieldset>" +
-//							"</form>");
 				}
 			}
-//			pgWrite += "</html>";
 			writePage(pgWrite, pw);
-//			pw.print("</html>");
 		}
 	}
 

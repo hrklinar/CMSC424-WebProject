@@ -43,7 +43,7 @@
 	                	</form>
 					</div>
 					<div id='admin'>
-						<form method="post" action="Admin.jsp">
+						<form method="post" action="Admin">
 	                        <input type="submit" name="button" value="Administrative" />                        
 	                	</form>
 					</div><br>
