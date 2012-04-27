@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import servlet.GlobalUser;
 
 /**
  * Servlet implementation class Register
@@ -78,7 +79,6 @@ public class Register extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		HttpSession session = request.getSession(true);
-//		pw.print("<html><h1>Register</h1>");
 		
 		GlobalUser user = ((GlobalUser)session.getAttribute("user"));
 		String pgWrite = "";
@@ -168,21 +168,21 @@ public class Register extends HttpServlet {
 									"<input type='password' name='password' id='password' maxlength=\"25\" /></div>" +
 									
 									"<div id='row'><label for='first_name' >First Name: </label>" +
-									"<input type='text' name='first_name' id='first_name' maxlength=\"25\" />" +
+									"<input type='text' name='first_name' id='first_name' maxlength=\"25\" value='" + first_name + "' />" +
 									"&nbsp; &nbsp;<label for='last_name' > Last Name: </label>" +
-									"<input type='text' name='last_name' id='last_name' maxlength=\"25\" /></div>" +
+									"<input type='text' name='last_name' id='last_name' maxlength=\"25\" value='" + last_name + "' />" + "</div>" +
 									
 									"<div id='row'><label for='address' >Address: </label>" + 
-									"<input type='text' name='address' id='address' maxlength=\"68\" size =\"60\" /></div>" +
+									"<input type='text' name='address' id='address' maxlength=\"68\" size =\"60\" value='" + address + "' />" + "</div>" +
 									
 									"<div id='row'><label for='city' >City:</label>" +
-									"<input type='text' name='city' id='city' maxlength=\"30\" />" +
+									"<input type='text' name='city' id='city' maxlength=\"30\" value='" + city + "' />" +
 									"&nbsp; &nbsp;<label for='statecode' >State: </label>" +
-									"<input type='text' name='statecode' id='statecode' maxlength=\"2\" size=\"2\" /> </div>" + 
+									"<input type='text' name='statecode' id='statecode' maxlength=\"2\" size=\"2\"  value='" + state_code + "' />" + "</div>" + 
 									
 									"<center><div id='row'><input type='submit' name='submit' value='Register' /></div></center>" +
 									"</fieldset>" +
-									"</form></div></div>";					    	
+									"</form></div></div>";
 					    } else {
 					    	address = address + " " + city + ", " + state_code;
 					    	String query = "INSERT INTO customers (email, password, first_name, last_name, address) VALUES ('" +
@@ -191,11 +191,14 @@ public class Register extends HttpServlet {
 					    	statement.executeQuery(query);
 					    	pgWrite += first_name + " " + last_name + ", you have successfully registered. You may now proceed in " +
 					    			"placing an order.";
-					    	//Log the user in
-					    	GlobalUser newUser = new GlobalUser(email, first_name, last_name, address);
-					    	session.setAttribute("user", newUser);
-					    	session.setAttribute("email", email);
-					    	pgWrite += "<form action='OrderOnline.jsp'> <input type='submit' value='Order Online' /> </form>";
+					    	
+					    	//Login User
+					    	user = new GlobalUser(email, first_name, last_name, address);
+						    session.setAttribute("user", user);
+						    session.setAttribute("email", user.email);
+						    
+						    //Forms
+					    	pgWrite += "<form action='Order' method='post'> <input type='submit' value='Order Online' /> </form>";
 					    	pgWrite += "<form action='index.jsp'> <input type='submit' value='Home' /> </form>";
 					    }
 					} catch (SQLException e) {
@@ -209,22 +212,22 @@ public class Register extends HttpServlet {
 							"<legend>Register</legend>" + 
 							"<input type='hidden' name='submitted' id='submitted' value='1'/>" +
 							"<div id='row'><label for='email' >Email: </label>" +
-							"<input type='text' name='email' id='email' maxlength=\"25\" /></div>" +
+							"<input type='text' name='email' id='email' maxlength=\"25\" value='" + email + "' />" +
 							"<div id='row'><label for='password' >Password: </label>" +
 							"<input type='password' name='password' id='password' maxlength=\"25\" /></div>" +
 							
 							"<div id='row'><label for='first_name' >First Name: </label>" +
-							"<input type='text' name='first_name' id='first_name' maxlength=\"25\" />" +
+							"<input type='text' name='first_name' id='first_name' maxlength=\"25\"  value='" + first_name + "' />" +
 							"&nbsp; &nbsp;<label for='last_name' > Last Name: </label>" +
-							"<input type='text' name='last_name' id='last_name' maxlength=\"25\" /></div>" +
+							"<input type='text' name='last_name' id='last_name' maxlength=\"25\" value='" + last_name + "' />" + "</div>" +
 							
 							"<div id='row'><label for='address' >Address: </label>" + 
-							"<input type='text' name='address' id='address' maxlength=\"68\" size =\"60\" /></div>" +
+							"<input type='text' name='address' id='address' maxlength=\"68\" size =\"60\" value='" + address + "' />" + "</div>" +
 							
 							"<div id='row'><label for='city' >City:</label>" +
-							"<input type='text' name='city' id='city' maxlength=\"30\" />" +
+							"<input type='text' name='city' id='city' maxlength=\"30\" value='" + city + "' />" +
 							"&nbsp; &nbsp;<label for='statecode' >State: </label>" +
-							"<input type='text' name='statecode' id='statecode' maxlength=\"2\" size=\"2\" /> </div>" + 
+							"<input type='text' name='statecode' id='statecode' maxlength=\"2\" size=\"2\"  value='" + state_code + "' />" + "</div>" + 
 							
 							"<center><div id='row'><input type='submit' name='submit' value='Register' /></div></center>" +
 							"</fieldset>" +

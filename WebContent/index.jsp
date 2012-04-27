@@ -24,13 +24,14 @@
 					</div>					
 					<div id='order'>
 						<%
-		              	String username = request.getParameter("username");
+		              	String email = (String)session.getAttribute("email");
 		              	String customerForm = "";
-		              	if (username == null || username.equals("")) {
+		              	if (email == null || email.equals("")) {
 		              		customerForm = "<form method='post' action=\"Customer\">";
 		              		customerForm += "<input type=\"submit\" name=\"button\" value=\"Order Online\" />";
 		              	} else {
-		              		
+		              		customerForm = "<form method='post' action=\"Order\">";
+		              		customerForm += "<input type=\"submit\" name=\"button\" value=\"Order Online\" />";
 		              	}
 		              	customerForm += "</form>";
 		                %>
@@ -43,7 +44,7 @@
 	                	</form>
 					</div>
 					<div id='admin'>
-						<form method="post" action="Admin">
+						<form method="post" action="Admin.jsp">
 	                        <input type="submit" name="button" value="Administrative" />                        
 	                	</form>
 					</div><br>

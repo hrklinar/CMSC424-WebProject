@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -102,23 +101,20 @@ public class Login extends HttpServlet {
 		    {
 			    GlobalUser user = new GlobalUser(resultSet.getString(1), resultSet.getString(2), 
 			    		resultSet.getString(3), resultSet.getString(4));
-			    writeStr += "<center>You have successfully logged in as " + user.first_name + " " + user.last_name + ".";
-			    writeStr += "<form action='Customer' method='post'><input type='submit' value='Order Online'></form>";
-//			    writePage(writeStr, pw);
-//			    pw.println("You have successfully logged in as " + user.first_name + " " + user.last_name + ".");
-			    session.setAttribute("user", user);
+			    writeStr += "<center>You have successfully logged in as " + user.first_name + " " + user.last_name + "(" + user.email + ").";
+			    writeStr += "<form action='Order' method='post'><input type='submit' value='Order Online'></form>";
 
-//			    pw.println("<form action='Customer' method='post'><input type='submit' value='Order Online'></form>");
+			    session.setAttribute("user", user);
+			    session.setAttribute("email", user.email);
 			} else {
 				writeStr += "<center><font color='red'>The username or password you entered was incorrect.</font>";				
-//		    	pw.println("<font color='red'>The username or password you entered was incorrect.</font>");
+
 		    }
 		    writeStr += "<form action='index.jsp'><input type='submit' value='Home'></form></center>";
 		    writePage(writeStr, pw);
-//		    pw.println("<form action='index.jsp'><input type='submit' value='Home'></form>");
 		}
 		catch(SQLException e) {
-		    System.out.println("An error occurs.");
+		    System.out.println("An error occured.");
 		    System.out.println(e.toString());
 		}
 	}
