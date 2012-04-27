@@ -14,8 +14,10 @@
 	            <h1>HB's Pizzeria Menu</h1>
 	        </div>
         </div>
-         <div id="header_left"></div>
-         <div id="header_right"></div>
+         <div id="header_left"> LEFT
+         </div>
+         <div id="header_right"> RIGHT
+         </div>
    	</div>
     <div id='contentwrapper'>
     	<div id="menu_center">
