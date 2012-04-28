@@ -119,3 +119,188 @@ insert into prices (item_id, type, reg_price) values (8, 'D', 5.00);
 insert into prices (item_id, type, reg_price) values (9, 'D', 5.00);
 insert into prices (item_id, type, reg_price) values (10, 'D', 5.00);
 insert into prices (item_id, type, reg_price) values (11, 'D', 5.00);
+
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1100010011, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1200010011, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2100010011, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2200010011, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3100010011, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 6.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3200010011, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 6.75);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1101000000, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1201000000, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2101000000, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2201000000, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3101000000, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3201000000, 'P', 'M', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.50);
+
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1101000000, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1201000000, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2101000000, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2201000000, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3101000000, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3201000000, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.50);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1111101100, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1211101100, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2111101100, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 6.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2211101100, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 6.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3111101100, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 7.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3211101100, 'P', 'T', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 7.25);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1100010011, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1200010011, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2100010011, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2200010011, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3100010011, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 6.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3200010011, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 6.75);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1101000000, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1201000000, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2101000000, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2201000000, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3101000000, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3201000000, 'P', 'W', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.50);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1101000000, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1201000000, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2101000000, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2201000000, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3101000000, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3201000000, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.50);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1111101100, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1211101100, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 5.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2111101100, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 6.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2211101100, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 6.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3111101100, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 7.25);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3211101100, 'P', 'H', to_timestamp('17:00', 'HH24:MI'), to_timestamp('19:00', 'HH24:MI'), 7.25);
+
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1100010011, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1200010011, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2100010011, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2200010011, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3100010011, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 6.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3200010011, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 6.75);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1101000000, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1201000000, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2101000000, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2201000000, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3101000000, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3201000000, 'P', 'F', to_timestamp('16:00', 'HH24:MI'), to_timestamp('18:00', 'HH24:MI'), 5.50);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1100010011, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1200010011, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2100010011, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2200010011, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3100010011, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 6.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3200010011, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 6.75)
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1101000000, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1201000000, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2101000000, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2201000000, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3101000000, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 5.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3201000000, 'P', 'SA', to_timestamp('14:00', 'HH24:MI'), to_timestamp('16:00', 'HH24:MI'), 5.50);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1100010011, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1200010011, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 4.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2100010011, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2200010011, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 5.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3100010011, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 6.75);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3200010011, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 6.75);
+
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1101000000, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (1201000000, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 4.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2101000000, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (2201000000, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 5.00);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3101000000, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 5.50);
+insert into happyprices (item_id, type, day, start_time, end_time, price)
+values (3201000000, 'P', 'SU', to_timestamp('13:00', 'HH24:MI'), to_timestamp('15:00', 'HH24:MI'), 5.50);
