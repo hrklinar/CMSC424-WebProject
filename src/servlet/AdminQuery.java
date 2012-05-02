@@ -26,12 +26,15 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/AdminQuery")
 public class AdminQuery extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+//	private static Connection conn;
+//	private static Statement stmt;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AdminQuery() {
         super();
+//        connectToDB();
         // TODO Auto-generated constructor stub
     }
     
@@ -51,7 +54,11 @@ public class AdminQuery extends HttpServlet {
     						 				"<h1>HB's Pizzeria: Administration</h1>"+
     						 			"</div>"+
     						 		"</div>"+
-    						 		"<div id='header_left'></div>"+
+    						 		"<div id='header_left'>" +
+    						 		"<form id='HOME' action='index.jsp' method='post' accept-charset='UTF-8'>" +
+    								     "<center><div id='row'><input type='submit' name='index' value='Home' /></div></center>"+
+    									"</form>"+
+    						 		"</div>"+
     						 		"<div id='header_right'></div>"+
     						 	"</div>"+
     						 	"<div id='contentwrapper'>"+
@@ -66,9 +73,6 @@ public class AdminQuery extends HttpServlet {
     	pw.println(writeString);
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
@@ -94,15 +98,17 @@ public class AdminQuery extends HttpServlet {
 		String start_time = request.getParameter("start_time");
 		String end_time = request.getParameter("end_time");
 		
+		String driverID = request.getParameter("driver");
+		String orderID = request.getParameter("order");
+		
 		if (task.equals("custHistory"))
 		{			
-			pg += "<div class='register_box'>";
-			pg += "<h2>Inactive Customers Report Query</h2><br>";
+			pg += "<div class='register_box'>";			
 			String st_todate = "to_date('"+start_date+"', 'MM/DD/YYYY')";
 			String end_todate = "to_date('"+end_date+"', 'MM/DD/YYYY')";
 			String format_date = "TO_CHAR(trans_date,'FXDD-MON-YYYY')";
 			String t_email = email.trim();
-			System.out.println(t_email);
+			pg += "<h2>Customer History Report</h2><br>";
 			String myquery = "select trans_id, "+format_date+", total from transactions where status = 'C' AND email = '"+t_email+"' "+
 					         "AND trans_date >= "+ st_todate +" AND trans_date <= "+end_todate;
 			ResultSet result = adminQuery.executeQuery(myquery);
@@ -111,10 +117,12 @@ public class AdminQuery extends HttpServlet {
 				{					
 					do
 				    {						
-						String trans_id = result.getString(1);
-						String date = result.getString(2);
-						String total = result.getString(3);
-						pg += "Transaction "+trans_id+" on "+date+". TOTAL = $"+total;
+						String trans_id = result.getString(1).trim();
+						String date = result.getString(2).trim();
+						String total = result.getString(3).trim();
+						Formatter fmt_total = new Formatter();
+						fmt_total.format("%.2f", Double.valueOf(total));
+						pg += "<center><div id='resultTitle'>Transaction "+trans_id+" on "+date+". TOTAL = $"+fmt_total+"</div>";
 						pg += "<table border='1'";
 						pg += "<tr><td><div id='table_hdr'>Item Description</div></td><td><div id='table_hdr'>Qty</div></td></tr>";
 						String pizza_query = "select pizza_id, qty from trans_p where trans_id = "+trans_id;
@@ -141,7 +149,7 @@ public class AdminQuery extends HttpServlet {
 								pg += "<tr><td>"+drink+"</td><td>"+d_qty+"</tr>";
 						    }while(drink_results.next());
 						}
-						pg += "</table><br>";
+						pg += "</table></center><br>";
 				    }while(result.next());
 				}
 				else
@@ -149,7 +157,6 @@ public class AdminQuery extends HttpServlet {
 					pg += "There are no transactions that match your given input.";
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			pg += "</div><form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
@@ -159,9 +166,9 @@ public class AdminQuery extends HttpServlet {
 		else if (task.equals("twRevenue"))
 		{
 			pg += "<div class='register_box'>";
-			pg += "<h2>Time Window Revenue Report</h2><br>";
+			pg += "<h2>Time Window Revenue Report</h2><br><center>";
 			String d1 = start_date + " "+ start_time;
-			String d2 = end_date + " "+ end_time;
+			String d2 = end_date + " "+ end_time;			
 			
 			Date date1 = null, date2 = null;
 			  SimpleDateFormat dtf = new SimpleDateFormat("MM/dd/yyyy HH:mm");	 
@@ -171,30 +178,12 @@ public class AdminQuery extends HttpServlet {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			System.out.println(start_date+":"+date1);
-			System.out.println(date1.getHours()+"|"+date1.getMinutes());
+//			System.out.println("Current Year = "+ date1.getYear());
+//			System.out.println(start_date+":"+date1);
+//			System.out.println(date1.getHours()+"|"+date1.getMinutes());
 			long dayDiff = computeDays(date1, date2);
-			boolean prevDay = false, prevWeek = false, prevMonth = false;
-			System.out.println(dayDiff);
-			if (dayDiff == 0)
-			{
-				prevDay = true;
-				prevWeek = true;
-				prevMonth = true;
-			}
-			if (dayDiff > 0 && dayDiff < 8)
-			{
-				//Do NOT need to compute the previous week
-				prevDay = false;
-				prevWeek = true;
-				prevMonth = true;
-			}
-			else if (dayDiff >= 8 && dayDiff <= 30)
-			{
-				prevDay = false;
-				prevWeek = false;
-				prevMonth = true;
-			}
+			boolean prevDay = false, prevWeek = false, prevMonth = false, prevYear = false;
+//			System.out.println(dayDiff);			
 			
 			/*first compute the statistics for the specified time window.*/
 			String startTime, endTime;
@@ -203,6 +192,36 @@ public class AdminQuery extends HttpServlet {
 			pg += "<b> Selected Time Period </b><br>";
 			pg += outputTWrevenue(startTime, endTime)+"<br>";
 			/*Based on elapsed days, compute previous day, week, and/or month */
+			if (dayDiff == 0)
+			{
+//				System.out.println("daydiff = 0");
+				prevDay = true;
+				prevWeek = true;
+				prevMonth = true;
+				prevYear = true;
+			}
+			else if (dayDiff > 0 && dayDiff < 8)
+			{
+				//Do NOT need to compute the previous week				
+				prevDay = false;
+				prevWeek = true;
+				prevMonth = true;
+				prevYear = true;
+			}
+			else if (dayDiff >= 8 && dayDiff <= 30)
+			{
+				prevDay = false;
+				prevWeek = false;
+				prevMonth = true;
+				prevYear = true;
+			}
+			else
+			{
+				prevDay = false;
+				prevWeek = false;
+				prevMonth = false;
+				prevYear = true;
+			}
 			if (prevDay)
 			{
 				pg += "<b> Previous Day </b><br>";
@@ -224,34 +243,44 @@ public class AdminQuery extends HttpServlet {
 				endTime = "(to_timestamp('"+d2+"', 'MM/DD/YYYY HH24:MI') - 30)";
 				pg += outputTWrevenue(startTime, endTime)+"<br>";
 			}
+			if (prevYear)
+			{
+				pg += "<b> Previous Year </b><br>";
+				startTime = "(to_timestamp('"+d1+"', 'MM/DD/YYYY HH24:MI') - 365)";
+				endTime = "(to_timestamp('"+d2+"', 'MM/DD/YYYY HH24:MI') - 365)";
+				pg += outputTWrevenue(startTime, endTime)+"<br>";
+			}
 			
-			pg += "</div><form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
+			pg += "</div></center><form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
 				     "<center><div id='row'><input type='submit' name='returnHome' value='Back' /></div></center>"+
 					"</form>";
 		}
 		else if (task.equals("hhReport"))
 		{
 			pg += "<div class='register_box'>";
-			pg += "<h2>Happy Hour Report</h2><br>";			
+			pg += "<h2>Happy Hour Report</h2><br><center>";			
 
 			String format_date = "TO_CHAR(trans_date,'MM-DD-YYYY')";
 			String format_time = "TO_CHAR(time,'hh24:mi')";
 			String format_day = "TO_CHAR(trans_date, 'DAY') as day ";
-			String queryBeforeDate = "to_date('"+start_date+"', 'MM-DD-YYYY') - 7";
-			String queryAfterDate = "to_date('"+start_date+"', 'MM-DD-YYYY') + 7";
+			String queryBeforeDate = "(to_date('"+start_date+"', 'MM-DD-YYYY') - 7)";
+			String queryAfterDate = "(to_date('"+start_date+"', 'MM-DD-YYYY') + 7)";
 			String queryDate = "to_date('"+start_date+"', 'MM-DD-YYYY')";
 			String beforeQuery = "select trans_id, "+format_date+", total, "+format_time+", "+format_day+
 								 	"from transactions where trans_date >= "+queryBeforeDate+
-									"AND trans_date <= "+queryDate+" AND status = 'C'";
+									" AND trans_date <= "+queryDate+" AND status = 'C'";
+//			System.out.println(start_date);
+//			System.out.println(beforeQuery);
 			String afterQuery = "select trans_id, "+format_date+", total, "+format_time+", "+format_day+
 									"from transactions where trans_date <= "+queryAfterDate+
-									"AND trans_date > "+queryDate+" AND status = 'C'";
+									" AND trans_date > "+queryDate+" AND status = 'C'";
+//			System.out.println(afterQuery);
 			ResultSet week1 = adminQuery.executeQuery(beforeQuery);
 			ResultSet week2 = adminQuery.executeQuery(afterQuery);
 			
 			pg += adminQuery.outputHHweek(week1, start_date, "Prior to")+"<br>";
 			pg += adminQuery.outputHHweek(week2, start_date, "After");			
-			pg += "</div><form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
+			pg += "</div></center><form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
 				     "<center><div id='row'><input type='submit' name='returnHome' value='Back' /></div></center>"+
 					"</form>";
 		}
@@ -263,9 +292,63 @@ public class AdminQuery extends HttpServlet {
 		{
 			pg += "--NO INPUT--";
 		}
+		else if (task.equals("dispatchTicket"))
+		{
+			//Driver's ID = driverID; TransactionID = orderID
+			Integer trans_id = Integer.parseInt(orderID);
+			String cust_email = "";
+			String cust_addr = "";
+			/*1- Find the customer's information. email, address*/
+			String customerquery = "select c.email, c.address from customers c, transactions t "+
+									"where t.trans_id = "+trans_id+" AND t.email = c.email";
+			ResultSet customerResult = adminQuery.executeQuery(customerquery);
+			try {
+				if (customerResult.next())
+				{
+					cust_email = customerResult.getString(1).trim();
+					cust_addr = customerResult.getString(2).trim();
+				}
+//				System.out.println(cust_email+"|"+cust_addr);
+				/*2- Update curr_loc of deliverypersons to the customer's address*/
+				String updatedrivers = "update deliverypersons set curr_loc = '"+cust_addr+"' where deliv_id = "+driverID;
+				ResultSet updateDriversRes = adminQuery.executeQuery(updatedrivers);
+				if (updateDriversRes.rowUpdated())
+				{
+					System.out.println("Table deliverypersons successfully updated");
+				}
+				
+				/*3- Insert this deliv_id and trans_id into deliveries (completed = 'U')*/
+				String deliveryInsert = "insert into deliveries (trans_id, deliv_id, completed) "+
+										"values ("+ orderID +", "+ driverID +", 'U')";
+				ResultSet deliveryInsResult = adminQuery.executeQuery(deliveryInsert);
+				if (deliveryInsResult.rowInserted())
+				{
+					System.out.println("Rows successfully inserted into table Deliveries");
+				}
+				
+				/*4- In transactions table, set status to 'D'*/
+				String update_trans = "update transactions set status = 'D' where trans_id = "+orderID;
+				ResultSet updateTransRes = adminQuery.executeQuery(update_trans);
+				if (updateTransRes.rowUpdated())
+				{
+					System.out.println("Transaction table successfully updated to status 'D'.");					
+				}
+				pg += "Ticket successfully dispatched to driver "+driverID;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			pg += "</div><form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
+				     "<center><div id='row'><input type='submit' name='returnHome' value='Back' /></div></center>"+
+					"</form>";
+		}
 		writePage(pg, pw);
 		
 	}
+	
 	
 	public ResultSet executeQuery(String query)
 	{
@@ -280,7 +363,7 @@ public class AdminQuery extends HttpServlet {
 		    System.out.println(e.toString());
 		}
 		try {
-		    // Connect to the Database
+//		     Connect to the Database
 		    conn = DriverManager.getConnection("jdbc:oracle:thin:@ginger.umd.edu:1521:dbclass2", "dbclass235", "O2FNJud3");
 		    Statement statement = conn.createStatement();
 		    resultSet = statement.executeQuery(query);		    
@@ -294,6 +377,7 @@ public class AdminQuery extends HttpServlet {
 	
 	public String parse_pizzaID(String pizza_id)
 	{
+//		System.out.println(pizza_id);
 		String pizza_desc = "";
 		if (pizza_id.charAt(0) == '1')
 			pizza_desc += "Small, ";
@@ -349,7 +433,7 @@ public class AdminQuery extends HttpServlet {
 		String pg = "";
 		int numPizzas;
 		double pizzaRevenue;
-		AdminQuery adminQuery = new AdminQuery();
+//		AdminQuery adminQuery = new AdminQuery();
 		try {
 			if (weekRes.next())
 			{
@@ -364,18 +448,20 @@ public class AdminQuery extends HttpServlet {
 				    Integer trans_id = Integer.parseInt(weekRes.getString(1));
 				    String t_time = weekRes.getString(4).trim();
 				    String t_date = weekRes.getString(2).trim();
-				    String to_timestamp = "to_timestamp('"+t_time+"', 'HH24:MI')";
+				    String to_timestamp = "to_timestamp('04-01-12 "+t_time+"', 'MM-DD-YY HH24:MI')";
 				    
 				    /*This query returns pizzaId, and price for a HH on a given day */
-				    String hhPricequery = "select price , item_id from happyprices where "+to_timestamp+
+				    String hhPricequery = "select price, item_id from happyprices where "+to_timestamp+
 							  				" >= start_time AND "+to_timestamp+" <= end_time AND day = '"+daySym+"'";
-				    ResultSet hhResult = adminQuery.executeQuery(hhPricequery);
+//				    System.out.println(hhPricequery);
+				    ResultSet hhResult = executeQuery(hhPricequery);
 				    ArrayList<String> hhPrices = new ArrayList<String>();
 				    ArrayList<String> hhIds = new ArrayList<String>();
 				    if (hhResult.next())
 				    {
 				    	do
 				    	{
+//				    		System.out.println("hhResult loop");
 				    		hhPrices.add(hhResult.getString(1).trim());
 				    		hhIds.add(hhResult.getString(2).trim());
 				    	}while (hhResult.next());
@@ -383,20 +469,23 @@ public class AdminQuery extends HttpServlet {
 				    
 				    /*This query will return the pizza_ids for a particular transaction */
 				    String pizza_query = "select pizza_id, qty from trans_p where trans_id = "+trans_id;
-				    ResultSet pizza_res = adminQuery.executeQuery(pizza_query);
+				    ResultSet pizza_res = executeQuery(pizza_query);
 				    if (pizza_res.next())
 				    {
 				    	do
 				    	{
+//				    		System.out.println("pizza_res loop");
 				    		String p_id = pizza_res.getString(1).trim();				    		
 				    		Integer p_qty = Integer.parseInt(pizza_res.getString(2));
 				    		/* retreive the HH price for this pizza ID */
 				    		int i = 0;
 				    		for (String id : hhIds)
 				    		{
+//				    			System.out.println("FOR LOOP");
 				    			//This pizza is a HH pizza
 				    			if (id.equals(p_id))
 				    			{
+//				    				System.out.println("if");
 				    				numPizzas += 1;
 					    			Double hhprice = Double.valueOf(hhPrices.get(i));
 					    			pizzaRevenue += (p_qty * hhprice);
@@ -430,8 +519,7 @@ public class AdminQuery extends HttpServlet {
 		else if (pizza_id.charAt(0) == '2')
 			total += 10.00;
 		else if (pizza_id.charAt(0) == '3')
-			total += 12.00;
-		
+			total += 12.00;		
 		if (pizza_id.charAt(2) == '1')
 			total += 0.50;
 		if (pizza_id.charAt(3) == '1')
@@ -448,7 +536,7 @@ public class AdminQuery extends HttpServlet {
 			total += 0.50;
 		if (pizza_id.charAt(9) == '1')
 			total += 0.50;
-		System.out.println(total);
+//		System.out.println(total);
 		return total;
 	}
 	
@@ -460,7 +548,7 @@ public class AdminQuery extends HttpServlet {
 		double revenue = 0.0, pizzaTotal, drinkTotal;
 		String trans_query = "select trans_id, trans_date, total from transactions where status = 'C'"+ 
 								" AND time >= "+startTime+" AND time <= "+endTime;
-		System.out.println(trans_query);
+//		System.out.println(trans_query);
 		ResultSet transRes = aq.executeQuery(trans_query);
 		try {
 			if (transRes.next())
@@ -511,7 +599,7 @@ public class AdminQuery extends HttpServlet {
 			}
 			else
 			{
-				pg += "There are no transactions for this time period.";
+				pg += "There are no transactions for this time period.<br>";
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

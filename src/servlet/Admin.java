@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Formatter;
 
 import javax.servlet.ServletException;
@@ -72,7 +73,11 @@ public class Admin extends HttpServlet {
     						 				"<h1>HB's Pizzeria: Administration</h1>"+
     						 			"</div>"+
     						 		"</div>"+
-    						 		"<div id='header_left'></div>"+
+    						 		"<div id='header_left'>" +
+    						 		"<form id='HOME' action='index.jsp' method='post' accept-charset='UTF-8'>" +
+    									 "<center><div id='row'><input type='submit' name='index' value='Home' /></div></center>"+
+    								"</form>"+
+    						 		"</div>"+
     						 		"<div id='header_right'></div>"+
     						 	"</div>"+
     						 	"<div id='contentwrapper'>"+
@@ -114,12 +119,14 @@ public class Admin extends HttpServlet {
 		String prefCust = request.getParameter("prefCustReport");
 		String inactive = request.getParameter("inactiveCusts");
 		String retHome = request.getParameter("returnHome");
+		String dispatchTicket = request.getParameter("dispatchTicket");
+		
 		
 		
 		//The administrator hasn't visited this page before
 		if (adminName == null && adminPwd == null)
 		{
-			System.out.println("inside nulls");
+//			System.out.println("inside nulls");
 			pgWrite += "<div class='register_box'><div id='panel'>";
 			pgWrite += "<form id='adminLogin' action='adminLogin' method='post' accept-charset='UTF-8'>" +
 					"<fieldset >" +
@@ -137,6 +144,7 @@ public class Admin extends HttpServlet {
 		{
 			if (logout != null)
 			{
+//				System.out.println("logout");
 				//the user wants to logout
 				session.removeAttribute("adminName");
 				session.removeAttribute("adminPwd");
@@ -160,6 +168,7 @@ public class Admin extends HttpServlet {
 				
 				if (custHistory != null)
 				{
+//					System.out.println("custhistory");
 					session.setAttribute("adminTask", "custHistory");
 					pgWrite += "<div class='register_box'>";
 					pgWrite += "<h2>Customer Transaction History Query</h2>";
@@ -180,6 +189,7 @@ public class Admin extends HttpServlet {
 				}
 				else if (twRevenue != null)
 				{
+//					System.out.println("twrevenue");
 					session.setAttribute("adminTask", "twRevenue");
 					pgWrite += "<div class='register_box'>";
 					pgWrite += "<h2>Time-Window Revenue</h2>";
@@ -202,6 +212,7 @@ public class Admin extends HttpServlet {
 				}
 				else if (hhReport != null)
 				{
+//					System.out.println("hhreport");
 					session.setAttribute("adminTask", "hhReport");
 					pgWrite += "<div class='register_box'>";
 					pgWrite += "<h2>Happy Hour Analysis Report</h2>";
@@ -218,8 +229,9 @@ public class Admin extends HttpServlet {
 				}
 				else if (prefCust != null)
 				{
+//					System.out.println("prefcust");
 					session.setAttribute("adminTask", "prefCust");					
-					pgWrite += "<h2>Prefferred Customers Report Query</h2><br>";
+					pgWrite += "<div class='register_box'><h2>Preferred Customers Report</h2>";
 					String query = "with temp as (select email, sum(total) as total_spent "+
 								    "from transactions where trans_date >= (sysdate - 30) AND status = 'C' "+
 								    "group by email)"+
@@ -228,7 +240,9 @@ public class Admin extends HttpServlet {
 					ResultSet results = aq.executeQuery(query);
 					try {
 						if (results.next())
-						{
+						{	
+							pgWrite += "<table border='1'>";
+							pgWrite += "<tr><td><div id='table_hdr'>Customer</div></td><td><div id='table_hdr'>Total Spent</div></td><td><div id='table_hdr'>Order Frequency</div></td><td><div id='table_hdr'>Amnt. Spent on Pizzas</div></td><td><div id='table_hdr'>Amount Spent on Drinks</div></td><td><div id='table_hdr'>Avg Spent per Delivery</div></td></tr>";
 							do
 							{
 								int numTrans = 0;
@@ -283,30 +297,29 @@ public class Admin extends HttpServlet {
 												totalPizza += (pizzaPrice * p_qty);
 											}while(pizza_res.next());
 										}
-										double avg = (double)total_spent/(double)numTrans;
-										Formatter fmt_total = new Formatter(); 
-									    fmt_total.format("%.2f", total_spent);
-									    Formatter fmt_totP = new Formatter(); 
-									    fmt_totP.format("%.2f", totalPizza);
-									    Formatter fmt_totD = new Formatter(); 
-									    fmt_totD.format("%.2f", totalDrink);
-									    Formatter fmt_avg = new Formatter(); 
-									    fmt_avg.format("%.2f", avg);
-										pgWrite += last_name+", "+first_name+"<br>";
-										pgWrite += "Total Spent = $"+ fmt_total+", ";
-										pgWrite += "Frequency of Orders = "+ numTrans+"<br>";
-										pgWrite += "Amount Spent on Pizzas = $"+ fmt_totP+", ";
-										pgWrite += "Amount Spent on Drinks = $"+ fmt_totD+"<br>";
-										pgWrite += "Average amount collected per delivery = $"+ fmt_avg+"<br><br>";
+																				
 								    }while(trans_result.next());
+									double avg = (double)total_spent/(double)numTrans;
+									Formatter fmt_total = new Formatter(); 
+								    fmt_total.format("%.2f", total_spent);
+								    Formatter fmt_totP = new Formatter(); 
+								    fmt_totP.format("%.2f", totalPizza);
+								    Formatter fmt_totD = new Formatter(); 
+								    fmt_totD.format("%.2f", totalDrink);
+								    Formatter fmt_avg = new Formatter(); 
+								    fmt_avg.format("%.2f", avg);																	
+									pgWrite += "<tr><td>"+first_name+" "+last_name+"</td><td>$"+ fmt_total +
+												"</td><td>"+numTrans+"</td><td>$"+fmt_totP+"</td><td>$"+fmt_totD+
+												"</td><td>$"+fmt_avg+"</td></tr>";
 								}
 								
 							}while(results.next());
+							pgWrite += "</table>";
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
-					pgWrite += "<form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
+					pgWrite += "</div><form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
 						     "<center><div id='row'><input type='submit' name='returnHome' value='Back' /></div></center>"+
 							"</form>";
 				}
@@ -314,7 +327,7 @@ public class Admin extends HttpServlet {
 				{
 					session.setAttribute("adminTask", "inactive");
 					pgWrite += "<div class='register_box'>";
-					pgWrite += "<h2>Inactive Customers Report Query</h2><br>";
+					pgWrite += "<h2>Inactive Customers Report</h2><br>";
 					String query = "select email, first_name, last_name "+
 								   "from customers "+
 								   "where active = 'N' "+
@@ -324,8 +337,8 @@ public class Admin extends HttpServlet {
 					try {
 						if (result.next())
 						{
-							pgWrite += "<table border='1'";
-							pgWrite += "<tr><td>Last Name</td><td>First Name</td><td>Email</td></tr>";							
+							pgWrite += "<center><table border='1'";
+							pgWrite += "<tr><td><div id='table_hdr'>Last Name</div></td><td><div id='table_hdr'>First Name</div></td><td><div id='table_hdr'>Email</div></td></tr>";							
 						    do
 						    {						    	
 						    	pgWrite += "<tr>";
@@ -344,12 +357,77 @@ public class Admin extends HttpServlet {
 						System.out.println("An SQL error occurred.");
 						e.printStackTrace();
 					}
+					pgWrite += "</center></div><form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
+						     "<center><div id='row'><input type='submit' name='returnHome' value='Back' /></center>"+
+							"</form>";
+				}
+				else if (dispatchTicket != null)
+				{
+					session.setAttribute("adminTask", "dispatchTicket");
+					String availableDrivers = "select deliv_id from deliverypersons where curr_loc = 'store'";
+					ResultSet availDrivers = aq.executeQuery(availableDrivers);
+					String orderQuery = "select trans_id from transactions where status = 'O' order by trans_id";
+					ResultSet availOrders = aq.executeQuery(orderQuery);
+					ArrayList<String> drivers = new ArrayList<String>();
+					ArrayList<String> orders = new ArrayList<String>();
+					
+					try {
+						if (availDrivers.next())
+						{
+							do
+							{
+								drivers.add(availDrivers.getString(1).trim());
+							}while (availDrivers.next());
+						}
+						if (availOrders.next())
+						{
+							do
+							{
+								orders.add(availOrders.getString(1).trim());
+							}while (availOrders.next());
+						}
+						if (drivers.size() > 0 && orders.size() > 0)
+						{
+							//enough drivers and orders to dispatch ticket
+							pgWrite += "<div id='panel'>";
+							pgWrite += "<form id='ticket' action='AdminQuery' method='post' accept-charset='UTF-8'>";
+							pgWrite += "<b> Select a Driver ID<b><br>";
+							pgWrite += "<select name='driver'>";
+							for (String d : drivers)
+							{
+								  pgWrite += "<option>"+d+"</option>";								  
+							}
+							pgWrite += "</select><br><br>";
+							
+							pgWrite += "<b> Select an Order number<b><br>";
+							pgWrite += "<select name='order'>";
+							for (String order : orders)
+							{
+								  pgWrite += "<option>"+order+"</option>";								  
+							}
+							pgWrite += "</select><br><br>";
+							pgWrite += "<input type='submit' name='dispatchTicket' value='Submit' />";
+							pgWrite += "</form";
+							pgWrite += "</div>";
+						}
+						else if (drivers.size() == 0)
+						{
+							pgWrite += "There are no drivers available.";
+						}
+						else if (orders.size() == 0)
+						{
+							pgWrite += "There are no orders available for delivery.";
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 					pgWrite += "<form id='back' action='Admin' method='post' accept-charset='UTF-8'>" +
 						     "<center><div id='row'><input type='submit' name='returnHome' value='Back' /></div></center>"+
 							"</form>";
 				}
 				else
 				{
+//					System.out.println("back at home screen");
 					//the user is still logged in but back at home screen--show buttons
 					pgWrite += "<div class='register_box'>";
 					pgWrite += "<form id='adminButtons' action='Admin' method='post' accept-charset='UTF-8'>"+
@@ -359,14 +437,17 @@ public class Admin extends HttpServlet {
 								"<div id='row'><input type='submit' name='HHreport' value='Happy Hour Analysis' /></div>"+
 								"<div id='row'><input type='submit' name='prefCustReport' value='Preferred Customers' /></div>"+
 								"<div id='row'><input type='submit' name='inactiveCusts' value='Inactive Customers Report' /></div>"+
+								"<div id='row'><input type='submit' name='dispatchTicket' value='Dispatch Ticket' /></div>"+
 							 "</center></form>";
 					pgWrite += "</div><form id='logout' action='Admin' method='post' accept-charset='UTF-8'>" +
 						     "<center><div id='row'><input type='submit' name='adminLogout' value='Log out' /></center>"+
 							"</form>";
 				}
+//				System.out.println("end of retHome");
 			}			
 			else
 			{
+//				System.out.println("else");
 				//the user is still logged in but back at home screen--show buttons
 				pgWrite += "<div class='register_box'>";
 				pgWrite += "<form id='adminButtons' action='Admin' method='post' accept-charset='UTF-8'>"+
@@ -376,6 +457,7 @@ public class Admin extends HttpServlet {
 							"<div id='row'><input type='submit' name='HHreport' value='Happy Hour Analysis' /></div>"+
 							"<div id='row'><input type='submit' name='prefCustReport' value='Preferred Customers' /></div>"+
 							"<div id='row'><input type='submit' name='inactiveCusts' value='Inactive Customers Report' /></div>"+
+							"<div id='row'><input type='submit' name='dispatchTicket' value='Dispatch Ticket' /></div>"+
 						 "</center></form>";
 				pgWrite += "</div><form id='logout' action='Admin' method='post' accept-charset='UTF-8'>" +
 					     "<center><div id='row'><input type='submit' name='adminLogout' value='Log out' /></center>"+

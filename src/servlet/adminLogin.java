@@ -41,7 +41,10 @@ public class adminLogin extends HttpServlet {
     						 				"<h1>HB's Pizzeria: Administration</h1>"+
     						 			"</div>"+
     						 		"</div>"+
-    						 		"<div id='header_left'>"+    						 			
+    						 		"<div id='header_left'>"+
+    						 		"<form id='HOME' action='index.jsp' method='post' accept-charset='UTF-8'>" +
+								     "<center><div id='row'><input type='submit' name='index' value='Home' /></div></center>"+
+									"</form>"+
     						 		"</div>"+
     						 		"<div id='header_right'>"+
     						 		"</div>"+
@@ -76,7 +79,23 @@ public class adminLogin extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String pg = "";
 
-		if (id.equals("adminUser") && pwd.equals("BrendanHeather"))
+		if (id == null || pwd == null)
+		{
+			pg += "<div class='register_box'><div id='panel'>";
+			pg += "<div id='err'> Incorrect login credentials</div>";
+			pg += "<form id='adminLogin' action='adminLogin' method='post' accept-charset='UTF-8'>" +
+					"<fieldset >" +
+					"<legend>Administrator Login</legend>" + 
+					"<input type='hidden' name='submitted' id='submitted' value='1'/>" +
+					"<div id='row'><label for='adminId' >Login ID: </label>" +
+					"<input type='text' name='adminID' id='adminID' maxlength=\"25\" /></div>" +
+					"<div id='row'><label for='adminPwd' >Password: </label>" +
+					"<input type='password' name='adminPwd' id='adminPwd' maxlength=\"25\" /></div>" +
+					"<center><div id='row'><input type='submit' name='adminSubmit' value='Log on' /></div></center>" +
+					"</fieldset>" +
+					"</form></div></div>";
+		}
+		else if (id.equals("adminUser") && pwd.equals("BrendanHeather"))
 		{
 			//successful Login--set session variables
 			session.setAttribute("adminName", id);
@@ -90,6 +109,7 @@ public class adminLogin extends HttpServlet {
 						"<div id='row'><input type='submit' name='HHreport' value='Happy Hour Analysis' /></div>"+
 						"<div id='row'><input type='submit' name='prefCustReport' value='Preferred Customers' /></div>"+
 						"<div id='row'><input type='submit' name='inactiveCusts' value='Inactive Customers Report' /></div>"+
+						"<div id='row'><input type='submit' name='dispatchTicket' value='Dispatch Ticket' /></div>"+
 					 "</center></form>";
 			pg += "</div><form id='logout' action='Admin' method='post' accept-charset='UTF-8'>" +
 				     "<center><div id='row'><input type='submit' name='adminLogout' value='Log out' /></center>"+

@@ -38,8 +38,8 @@ h2
 {
     font-size: 1.25em;
     margin: 0;
-    padding-top: .5em;
-    padding-bottom: .5em;
+    padding-top: .2em;
+    padding-bottom: .1em;
     text-align: center;
     text-shadow: 0.1em 0.1em 0.2em gray;
 }
@@ -81,7 +81,7 @@ h2
 
 #center_column
 {
-    padding-top: 1em;
+    padding-top: .25em;
     padding-bottom: 1em;
     margin: 0 12.5% 0 12.5%;
 }
@@ -242,8 +242,14 @@ h2
 .register_box
 {
     padding: 1em;
-    margin-top: 1em;
+    margin-top: .5em;
     margin: 0 5% 0 5%;
    	border: 0.6em solid #F78181;
   	border-style: ridge;
+}
+
+#resultTitle
+{
+	font-size: 1.25em;
+	font-weight: bold;
 }

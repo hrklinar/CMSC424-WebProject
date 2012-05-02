@@ -59,7 +59,7 @@ h1{
 }
 
 #inner {
-	width: 80%;
+	width: 95%;
 	left: 0;
 	right: 0;
 	margin-left: auto;
@@ -67,63 +67,48 @@ h1{
 	margin-top: .2em;
 	margin-bottom: 1em;
 	/* border: 0.125em solid blue; */	
-	padding: .2em;
+	/* padding: .2em; */
+	/* border: solid red; */
 }
 
 #inner_bot {
+	padding-top: .25em;
 	text-align: center;
 	font-size: .75em;
 	color: #544E4F;
 	border-top: .2em solid black;
 }
 
-#inner_text {
-	text-align: center;
-	font-size: 1em;
-	color: #544E4F;
-	margin-bottom: .5em;
-}
-
 #submit-button {
 	margin-top: .5em;
 }
 
-.buttons
-{
-	overflow-y:hidden;
-    width:100%;
-    margin: 0 auto;
-    margin-top: .5em;
-    margin-bottom: .2em;
-    margin-right: .5em;
-    margin-left: .5em;
-    /* padding-bottom: 2em; */
-    padding: .5em .5em .5em .5em;
-    line-height:150%;
-    /* margin: 1em; */
-
-
-}
 #menu
 {
 	float:left;
-    width: 25%;
+    width: 12%;
 }
 
 #order
 {
 	float:left;
-    width: 25%;    
+    width: 21%;    
 }
 
-#contact
+#driver
 {
 	float:left;
-    width: 25%;
+    width: 22%;
 }
 
 #admin
 {
 	float:left;
     width: 25%;
+}
+
+#contact
+{
+	float:left;
+    width: 20%;
 }

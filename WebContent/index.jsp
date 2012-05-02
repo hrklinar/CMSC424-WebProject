@@ -15,8 +15,6 @@
 				<div id="myImage" />
 			</h1>						
 			<div id="inner">								
-				<div id="inner_text">
-				<div class='buttons'>
 					<div id='menu'>
 						<form method="post" action="menu.jsp">
 	                        <input type="submit" name="button" value="Menu" />
@@ -24,13 +22,14 @@
 					</div>					
 					<div id='order'>
 						<%
-		              	String username = request.getParameter("username");
+		              	String email = (String)session.getAttribute("email");
 		              	String customerForm = "";
-		              	if (username == null || username.equals("")) {
+		              	if (email == null || email.equals("")) {
 		              		customerForm = "<form method='post' action=\"Customer\">";
-		              		customerForm += "<input type=\"submit\" name=\"button\" value=\"Order Online\" />";
+		              		customerForm += "<input type=\"submit\" name=\"button\" value=\"Log in/Register\" />";
 		              	} else {
-		              		
+		              		customerForm = "<form method='post' action=\"Order\">";
+		              		customerForm += "<input type=\"submit\" name=\"button\" value=\"Log in/Register\" />";
 		              	}
 		              	customerForm += "</form>";
 		                %>
@@ -42,22 +41,22 @@
 	                        <input type="submit" name="button" value="Contact Us" />                        
 	                	</form>
 					</div>
+					<div id='driver'>
+						<form method="post" action="Driver">
+	                        <input type="submit" name="button" value="Delivery Drivers" />                        
+	                	</form>
+					</div>
 					<div id='admin'>
 						<form method="post" action="Admin">
 	                        <input type="submit" name="button" value="Administrative" />                        
 	                	</form>
-					</div><br>
-	               		<!-- SEARCH //test to see if database creation worked.<br><br>
-					<form method='post' action="DemoServletPath">
-						<label>Enter Customer Name: </label><input name="name" /><br>
-						<div id="submit-button"><input type="submit" /></div>
-					</form> -->
-				</div>
-				</div>				 
+					</div>
+					
+					<br>	 
 			</div>
-			<div id="inner_bot">					
+			<div id='inner_bot'>					
 					This website was created by Heather Klinar and Brendan Fruin at the University of Maryland. <br>
-					Last update: 04-08-2012.
+					Last update: 05-01-2012.
 				</div>
 		</div>
 	</div>
